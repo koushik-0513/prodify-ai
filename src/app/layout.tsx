@@ -15,7 +15,7 @@ export default function RootLayout({
       <body>
         <MobileTopNavigation />
         <Sidebar />
-        <div className="lg:ml-66 pt-16 lg:pt-0 sm:pt-16 md:pt-16">
+        <div className="lg:ml-66">
           {children}
         </div>
         <FloatingActionButton />

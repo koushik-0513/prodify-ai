@@ -41,6 +41,47 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  
+  /* Custom Prodify Colors */
+  --color-prodify-primary: #736FC3;
+  --color-prodify-secondary: #6B60BE;
+  --color-prodify-light: #F8F4FF;
+  --color-prodify-light-alt: #eeebf7;
+  --color-project-purple: #8B5CF6;
+  --color-project-purple-light: #F7E6FE;
+  --color-project-indigo: #5B5FC7;
+  --color-project-indigo-light: #E8E7FF;
+  --color-project-teal: #3B9EBD;
+  --color-project-teal-light: #DCF2FA;
+  --color-accent-cyan: #34D1CB;
+  --color-accent-cyan-alt: #2BD3D1;
+  --color-accent-cyan-light: #ACEDEE;
+  --color-accent-cyan-lighter: #F0FFFD;
+  --color-accent-orange: #FDA95E;
+  --color-accent-orange-light: #FFF5F0;
+  --color-accent-orange-warm: #FCD2AC;
+  --color-accent-purple: #5C4CE1;
+  --color-accent-purple-light: #CECDF4;
+  --color-accent-purple-lighter: #F5F6FF;
+  --color-accent-purple-dark: #6A39DA;
+  --color-accent-green: #10B981;
+  --color-accent-green-light: #D1FAE5;
+  --color-status-online: #10B981;
+  --color-status-completed: #D1FAE5;
+  --color-status-completed-text: #047857;
+  --color-status-progress: #DBEAFE;
+  --color-status-progress-text: #1E40AF;
+  --color-status-planning: #FEF3C7;
+  --color-status-planning-text: #92400E;
+  --color-priority-high: #FEE2E2;
+  --color-priority-medium: #FEF3C7;
+  --color-priority-low: #F3F4F6;
+  --color-due-urgent: #EF4444;
+  --color-due-soon: #F97316;
+  --color-due-normal: #111827;
+  --color-due-future: #6B7280;
+  --color-meeting-bg: #F5F6FF;
+  --color-avatar-bg: #FFFEFA;
 }
 
 :root {
