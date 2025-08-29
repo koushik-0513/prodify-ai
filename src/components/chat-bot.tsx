@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-const FloatingActionButton = () => {
+export const FloatingActionButton = () => {
     return (
         <div className="fixed bottom-6 right-6 z-50">
             {/* Outer glow rings */}
@@ -11,7 +11,7 @@ const FloatingActionButton = () => {
             
             {/* Glass button with border */}
             <div className="relative border-4 border-white/80 rounded-full backdrop-blur-md bg-white/20">
-                <button className="w-10 h-10 bg-gradient-to-bl from-accent-purple/90 to-accent-purple-light/80 flex items-center justify-center rounded-full backdrop-blur-sm relative overflow-hidden shadow-2xl before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-tr before:from-white/40 before:via-white/20 before:to-transparent before:pointer-events-none">
+                <button className="w-10 h-10 flex items-center bg-gradient-to-br from-chat-bot-bg1 to-chat-bot-bg2 justify-center rounded-full backdrop-blur-sm relative overflow-hidden shadow-2xl before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-tr before:from-white/40 before:via-white/20 before:to-transparent before:pointer-events-none">
                     <Image 
                         src="/ai-logo.png" 
                         alt="chat-bot" 
@@ -25,4 +25,3 @@ const FloatingActionButton = () => {
     );
 };
 
-export default FloatingActionButton;

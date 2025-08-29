@@ -1,7 +1,7 @@
 import { TrendingUp, Users, Clock, Sparkle } from "lucide-react";
-import { DateItem, Goal, Project, ProjectDetail, RemindersData, Stat, Task } from "@/types/types";
+import { TDateItem, TGoal, TProject, TProjectDetail, TRemindersData, TStat, TTask } from "@/types/types";
 
-export const tasks: Task[] = [
+export const tasks: TTask[] = [
     {
         id: 1,
         name: "One-on-One Meeting",
@@ -67,7 +67,7 @@ export const tasks: Task[] = [
     }
 ];
 
-export const initialReminders: RemindersData = {
+export const initialReminders: TRemindersData = {
     today: [
         { id: 1, text: "Assess any new risks identified in the morning meeting.", completed: false },
         { id: 2, text: "Outline key points for tomorrow's stand-up meeting.", completed: false },
@@ -88,7 +88,7 @@ export const initialReminders: RemindersData = {
     ]
 };
 
-export const projectsDetails: ProjectDetail[] = [
+export const projectsDetails: TProjectDetail[] = [
     {
         id: 1,
         name: "Product Launch",
@@ -124,7 +124,7 @@ export const projectsDetails: ProjectDetail[] = [
     }
 ];
 
-export const stats: Stat[] = [
+export const stats: TStat[] = [
     {
         icon: TrendingUp,
         iconColor: '#736FC3', // Using hex instead of CSS variable
@@ -148,7 +148,7 @@ export const stats: Stat[] = [
     }
 ];
 
-export const projects: Project[] = [
+export const projects: TProject[] = [
     {
         id: 1,
         name: "Product launch",
@@ -190,7 +190,7 @@ export const projects: Project[] = [
     }
 ];
 
-export const goals: Goal[] = [
+export const goals: TGoal[] = [
     {
         id: 1,
         title: "Check Emails and Messages",
@@ -214,7 +214,7 @@ export const goals: Goal[] = [
     }
 ];
 
-export const dates: DateItem[] = [
+export const dates: TDateItem[] = [
     { day: "Fri", date: "04" },
     { day: "Sat", date: "05" },
     { day: "Sun", date: "06" },

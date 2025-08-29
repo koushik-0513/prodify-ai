@@ -4,9 +4,9 @@ import { FolderOpen, TrendingUp, Users, Clock, Plus } from "lucide-react";
 import { Button } from "./ui/button";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { stats, projectsDetails } from "@/data/data";
-import { ProjectDetail } from "@/types/types";
+import { TProjectDetail } from "@/types/types";
 
-const ProjectOverviewCard = () => {
+export const ProjectOverviewCard = () => {
     const getStatusColors = (status: string) => {
         switch(status) {
             case "Completed":
@@ -25,8 +25,8 @@ const ProjectOverviewCard = () => {
             {/* Header */}
             <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                    <FolderOpen className="h-4 w-4 sm:h-5 sm:w-5" style={{ color: 'var(--color-prodify-primary)' }} />
-                    <h2 className="text-base sm:text-lg font-medium text-foreground">Project Overview</h2>
+                    <FolderOpen className="h-4 w-4 sm:h-5 sm:w-5 text-prodify-primary" />
+                    <h2 className="text-base sm:text-lg font-medium">Project Overview</h2>
                 </div>
                 <Button variant="ghost" size="sm" className="p-2 hover:bg-accent rounded-lg transition-colors">
                     <Plus size={16} className="text-muted-foreground" />
@@ -40,7 +40,7 @@ const ProjectOverviewCard = () => {
                         <div className="flex items-center justify-center mb-1">
                             <stat.icon size={16} style={{ color: stat.iconColor }} />
                         </div>
-                        <p className="text-lg font-bold text-foreground">{stat.value}</p>
+                        <p className="text-lg font-bold">{stat.value}</p>
                         <p className="text-xs text-muted-foreground">{stat.label}</p>
                     </div>
                 ))}
@@ -48,13 +48,13 @@ const ProjectOverviewCard = () => {
 
             {/* Project List */}
             <div className="space-y-3">
-                {projectsDetails.map((project: ProjectDetail) => (
+                {projectsDetails.map((project: TProjectDetail) => (
                     <div 
                         key={project.id} 
                         className="p-3 bg-muted rounded-xl hover:bg-accent transition-colors cursor-pointer"
                     >
                         <div className="flex items-center justify-between mb-2">
-                            <h3 className="font-medium text-sm text-foreground truncate">{project.name}</h3>
+                            <h3 className="font-medium text-sm truncate">{project.name}</h3>
                             <span className={`text-xs px-2 py-1 rounded-full ${getStatusColors(project.status)}`}>
                                 {project.status}
                             </span>
@@ -89,4 +89,3 @@ const ProjectOverviewCard = () => {
     );
 };
 
-export default ProjectOverviewCard;

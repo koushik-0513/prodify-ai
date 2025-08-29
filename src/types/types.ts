@@ -2,7 +2,7 @@
 
 import { LucideIcon } from "lucide-react";
 
-export interface Task {
+export type TTask = {
     id: number;
     name: string;
     priority: "High" | "Medium" | "Low";
@@ -10,63 +10,71 @@ export interface Task {
     dueDate: string;
     dueDateColor: string;
     status: "IN PROGRESS" | "TO DO" | "UPCOMING";
-}
+};
 
-export interface Reminder {
+export type TReminder = {
     id: number;
     text: string;
     completed: boolean;
-}
+};
 
-export interface RemindersData {
-    today: Reminder[];
-    tomorrow: Reminder[];
-    dayAfter: Reminder[];
-}
+export type TReminderSection = 'today' | 'tomorrow' | 'dayAfter';
 
-export interface ProjectDetail {
+export type TRemindersData = {
+    today: TReminder[];
+    tomorrow: TReminder[];
+    dayAfter: TReminder[];
+};
+
+export type TProjectDetail = {
     id: number;
     name: string;
     status: "In Progress" | "Planning" | "Completed";
     progress: number;
     team: string[];
     color: string;
-}
+};
 
-export interface Stat {
+export type TStat = {
     icon: LucideIcon;
     iconColor: string;
     bg: string;
     value: string;
     label: string;
-}
+};
 
-export interface ProjectIcon {
+export type TProjectIcon = {
     IconComponent: LucideIcon;
     color: string;
     className: string;
     transform: string;
-}
+};
 
-export interface Project {
+export type TProject = {
     id: number;
     name: string;
-    icon: ProjectIcon;
+    icon: TProjectIcon;
     tasks: number;
     teammates: number;
     color: string;
-}
+};
 
-export interface Goal {
+export type TGoal = {
     id: number;
     title: string;
     project: string;
     progress: number;
     colorClass: string;
-}
+};
 
-export interface DateItem {
+export type TDateItem = {
     day: string;
     date: string;
     active?: boolean;
-}
+};
+
+export type TExpandedSections<T extends string = string> = Record<T, boolean>;
+
+// Specific expanded section types using the generic
+export type TTaskExpandedSections = TExpandedSections<'inProgress' | 'todo' | 'upcoming'>;
+export type TReminderExpandedSections = TExpandedSections<'today' | 'tomorrow' | 'dayAfter'>;

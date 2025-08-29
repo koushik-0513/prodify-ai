@@ -34,11 +34,11 @@ const projectItems = [
     { name: "Branding launch", color: "bg-project-teal" }
 ];
 
-const Sidebar = () => {
+export const Sidebar = () => {
     const pathname = usePathname();
 
     return (
-        <div className="hidden lg:flex flex-col h-screen w-65 fixed p-3 bg-sidebar border-none">
+        <div className="hidden lg:flex flex-col h-screen w-65 fixed p-3 bg-white border-none">
             {/* User Profile Section */}
             <div className="mb-4 border-border border-2 rounded-lg" id="wt-profile-nav-link">
                 <Link
@@ -63,11 +63,11 @@ const Sidebar = () => {
                         <p className="text-sm font-medium text-sidebar-foreground truncate text-modern">
                             Courtney Henry
                         </p>
-                        <p className="text-xs text-sidebar-accent-foreground truncate text-modern-light">
+                        <p className="text-xs text-muted-foreground truncate text-modern-light">
                             Online
                         </p>
                     </div>
-                    <ChevronDown size={16} />
+                    <ChevronDown size={16} className="text-muted-foreground" />
                 </Link>
             </div>
 
@@ -93,7 +93,7 @@ const Sidebar = () => {
                                         : "group-hover:text-slate-700"
                                 }`}
                             />
-                            <span className="font-medium text-sm text-modern text-black-700">
+                            <span className="font-medium text-sm text-modern text-foreground">
                                 {item.label}
                             </span>
                         </Link>
@@ -117,7 +117,7 @@ const Sidebar = () => {
                             className="flex items-center gap-3 p-2 rounded hover:bg-slate-100/80 cursor-pointer transition-colors"
                         >
                             <div className={`w-3 h-3 ${project.color} rounded`}></div>
-                            <span className="text-sm text-muted-foreground">{project.name}</span>
+                            <span className="text-sm text-foreground">{project.name}</span>
                         </div>
                     ))}
                 </div>
@@ -154,5 +154,3 @@ const Sidebar = () => {
         </div>
     );
 };
-
-export default Sidebar;

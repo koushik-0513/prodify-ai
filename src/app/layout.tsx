@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Sidebar from "@/components/side-navigation-bar";
-import MobileTopNavigation from "@/components/mobile-top-navigation";
-import FloatingActionButton from "@/components/chat-bot";
+import {Sidebar} from "@/components/side-navigation-bar";
+import {MobileTopNavigation} from "@/components/mobile-top-navigation";
+import {FloatingActionButton} from "@/components/chat-bot";
 
 export default function RootLayout({
   children,

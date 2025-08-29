@@ -37,7 +37,7 @@ const projectItems = [
     { name: "Branding launch", color: "bg-project-teal" }
 ];
 
-const MobileTopNavigation = () => {
+export const MobileTopNavigation = () => {
     const pathname = usePathname();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -83,7 +83,10 @@ const MobileTopNavigation = () => {
                     </div>
                 </Link>
 
-                <Link href="/home" className="flex items-center space-x-1 group" id="wt-home-nav-link"><Sparkle className="size-4" style={{ color: 'var(--color-prodify-primary)',transform: 'rotate(45deg)', fill: 'var(--color-prodify-primary)' }} /><span className = "text-[var(--color-prodify-primary)]">Prodify</span></Link>
+                <Link href="/home" className="flex items-center space-x-1 group" id="wt-home-nav-link">
+                    <Sparkle className="size-4 text-prodify-primary transform rotate-45 fill-prodify-primary" />
+                    <span className="text-prodify-primary">Prodify</span>
+                </Link>
 
                 <Button
                     variant="ghost"
@@ -232,4 +235,3 @@ const MobileTopNavigation = () => {
     );
 };
 
-export default MobileTopNavigation;

@@ -45,7 +45,7 @@
   /* Custom Prodify Colors */
   --color-prodify-primary: #736FC3;
   --color-prodify-secondary: #6B60BE;
-  --color-prodify-light: #F8F4FF;
+  --color-prodify-light: #FAF9FE;
   --color-prodify-light-alt: #eeebf7;
   --color-project-purple: #8B5CF6;
   --color-project-purple-light: #F7E6FE;
@@ -73,7 +73,7 @@
   --color-status-progress-text: #1E40AF;
   --color-status-planning: #FEF3C7;
   --color-status-planning-text: #92400E;
-  --color-priority-high: #FEE2E2;
+  --color-priority-high: #FFC3C3;
   --color-priority-medium: #FEF3C7;
   --color-priority-low: #F3F4F6;
   --color-due-urgent: #EF4444;
@@ -82,6 +82,8 @@
   --color-due-future: #6B7280;
   --color-meeting-bg: #F5F6FF;
   --color-avatar-bg: #FFFEFA;
+  --color-chat-bot-bg1: #A261FF;
+  --color-chat-bot-bg2: #9A94F5;
 }
 
 :root {
@@ -97,7 +99,7 @@
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
+  --muted-foreground: oklch(0.7 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
@@ -243,5 +245,15 @@
   /* Smooth transitions for responsive changes */
   .responsive-transition {
     transition: all 0.3s ease-in-out;
+  }
+}
+
+@layer components {
+  .grid-pattern {
+    background-image: 
+      linear-gradient(to bottom, transparent 0%, transparent 0%, var(--color-prodify-light) 50%),
+      linear-gradient(var(--color-prodify-light-alt) 2px, transparent 2px),
+      linear-gradient(90deg, var(--color-prodify-light-alt) 2px, transparent 2px);
+    background-size: 100% 100%, 50px 50px, 50px 50px;
   }
 }

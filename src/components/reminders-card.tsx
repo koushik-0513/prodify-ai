@@ -3,13 +3,13 @@
 import { Clock, Bell, Trash2, Check, ChevronUp, ChevronDown, EllipsisVertical } from "lucide-react";
 import { useState } from "react";
 import { initialReminders } from "@/data/data";
-import { Reminder } from "@/types/types";
+import { TReminder, TReminderExpandedSections, TReminderSection, TRemindersData } from "@/types/types";
 
 
-const RemindersCard = () => {
+export const RemindersCard = () => {
     const [reminders, setReminders] = useState(initialReminders);
     const [expandedReminders, setExpandedReminders] = useState<number[]>([]);
-    const [expandedSections, setExpandedSections] = useState({
+    const [expandedSections, setExpandedSections] = useState<TReminderExpandedSections>({
         today: true,
         tomorrow: false,
         dayAfter: false
@@ -23,15 +23,15 @@ const RemindersCard = () => {
         );
     };
 
-    const toggleSection = (section: 'today' | 'tomorrow' | 'dayAfter') => {
+    const toggleSection = (section: TReminderSection) => {
         setExpandedSections(prev => ({
             ...prev,
             [section]: !prev[section]
         }));
     };
 
-    const completeReminder = (section: 'today' | 'tomorrow' | 'dayAfter', id: number) => {
-        setReminders(prev => ({
+    const completeReminder = (section: TReminderSection, id: number) => {
+        setReminders((prev: TRemindersData) => ({
             ...prev,
             [section]: prev[section].map(reminder =>
                 reminder.id === id 
@@ -43,8 +43,8 @@ const RemindersCard = () => {
         setExpandedReminders(prev => prev.filter(i => i !== id));
     };
 
-    const deleteReminder = (section: 'today' | 'tomorrow' | 'dayAfter', id: number) => {
-        setReminders(prev => ({
+    const deleteReminder = (section: TReminderSection, id: number) => {
+        setReminders((prev: TRemindersData) => ({
             ...prev,
             [section]: prev[section].filter(reminder => reminder.id !== id)
         }));
@@ -58,7 +58,7 @@ const RemindersCard = () => {
         setExpandedReminders(prev => prev.filter(i => i !== id));
     };
 
-    const getSectionTitle = (section: 'today' | 'tomorrow' | 'dayAfter') => {
+    const getSectionTitle = (section: TReminderSection) => {
         const today = new Date();
         const tomorrow = new Date(today);
         tomorrow.setDate(tomorrow.getDate() + 1);
@@ -80,7 +80,7 @@ const RemindersCard = () => {
         }
     };
 
-    const renderReminderSection = (section: 'today' | 'tomorrow' | 'dayAfter', sectionReminders: Reminder[]) => {
+    const renderReminderSection = (section: TReminderSection, sectionReminders: TReminder[]) => {
         const completedCount = sectionReminders.filter(r => r.completed).length;
         const totalCount = sectionReminders.length;
         
@@ -195,8 +195,8 @@ const RemindersCard = () => {
     return (
         <div className="bg-card p-3 sm:p-4 lg:p-7 rounded-2xl border border-border">
             <div className="flex items-center gap-2 mb-3 sm:mb-4 ml-1">
-                <Clock className="h-4 w-4 sm:h-5 sm:w-5" style={{ color: 'var(--color-prodify-primary)' }} />
-                <h2 className="text-base sm:text-lg font-medium text-foreground">Reminders</h2>
+                <Clock className="size-4 sm:size-5 text-prodify-primary" />
+                <h2 className="text-base sm:text-lg font-medium">Reminders</h2>
             </div>
 
             <div className="space-y-4">
@@ -208,4 +208,3 @@ const RemindersCard = () => {
     );
 };
 
-export default RemindersCard;
