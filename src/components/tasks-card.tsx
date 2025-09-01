@@ -28,6 +28,17 @@ import {
   TableRow,
 } from "./ui/table";
 
+type TaskSectionProps = {
+  status: string;
+  sectionKey: keyof TTaskExpandedSections;
+  label: string;
+  bgColor: string;
+  textColor?: string;
+  isExpanded: boolean;
+  onToggle: (section: keyof TTaskExpandedSections) => void;
+  tasks: TTask[];
+};
+
 const TaskRow = ({ task }: { task: TTask }) => (
   <TableRow className="hover:bg-accent-alt">
     <TableCell className="flex items-center justify-start gap-2 py-2">
@@ -54,17 +65,6 @@ const TaskRow = ({ task }: { task: TTask }) => (
     </TableCell>
   </TableRow>
 );
-
-type TaskSectionProps = {
-  status: string;
-  sectionKey: keyof TTaskExpandedSections;
-  label: string;
-  bgColor: string;
-  textColor?: string;
-  isExpanded: boolean;
-  onToggle: (section: keyof TTaskExpandedSections) => void;
-  tasks: TTask[];
-};
 
 const TaskSection = ({
   status,
