@@ -1,34 +1,37 @@
 "use client";
 
-import { Plus, ChevronDown, Briefcase, Sparkle } from "lucide-react";
-import { Button } from "./ui/button";
-import { projects } from "@/data/data";
+import { Briefcase, ChevronDown, Plus, Sparkle } from "lucide-react";
+
 import { cn } from "@/lib/utils";
+
+import { projects } from "@/data/data";
+
+import { Button } from "./ui/button";
 
 export const ProjectsCard = () => {
   return (
-    <div className="bg-card p-3 sm:p-4 lg:p-5 rounded-2xl border border-border">
-      <div className="flex items-center mb-4">
-        <div className="flex items-center gap-2 ml-3 mr-3">
-          <Briefcase className="size-4 sm:size-5 text-prodify-primary" />
-          <h2 className="text-base sm:text-lg font-medium">Projects</h2>
+    <div className="bg-card border-border rounded-2xl border p-3 sm:p-4 lg:p-5">
+      <div className="mb-4 flex items-center">
+        <div className="mr-3 ml-3 flex items-center gap-2">
+          <Briefcase className="text-prodify-primary size-4 sm:size-5" />
+          <h2 className="text-base font-medium sm:text-lg">Projects</h2>
         </div>
         <Button
           variant="ghost"
-          className="flex items-center gap-1 text-muted-foreground hover:text-foreground hover:bg-accent text-xs sm:text-sm px-3 py-2 rounded-lg transition-colors"
+          className="text-muted-foreground hover:text-foreground hover:bg-accent flex items-center gap-1 rounded-lg px-3 py-2 text-xs transition-colors sm:text-sm"
         >
           Recents
           <ChevronDown className="h-3 w-3 sm:h-4 sm:w-4" />
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-1">
+      <div className="grid grid-cols-1 gap-2 lg:grid-cols-2 lg:gap-1">
         {/* Create new project card */}
-        <div className="flex items-center gap-4 ml-3">
-          <div className="flex items-center border-prodify-primary hover:border-accent-purple hover:shadow-md transition-all duration-200 cursor-pointer p-2 border-2 border-dashed rounded-xl">
-            <Plus className="h-6 w-6 sm:h-7 sm:w-7 text-prodify-primary" />
+        <div className="ml-3 flex items-center gap-4">
+          <div className="border-prodify-primary hover:border-accent-purple flex cursor-pointer items-center rounded-xl border-2 border-dashed p-2 transition-all duration-200 hover:shadow-md">
+            <Plus className="text-prodify-primary h-6 w-6 sm:h-7 sm:w-7" />
           </div>
-          <p className="font-semibold text-sm sm:text-base truncate">
+          <p className="truncate text-sm font-semibold sm:text-base">
             Create new project
           </p>
         </div>
@@ -37,13 +40,13 @@ export const ProjectsCard = () => {
         {projects.map((project) => (
           <div
             key={project.id}
-            className="rounded-xl p-3 sm:p-4 hover:shadow-lg transition-all duration-200 cursor-pointer"
+            className="cursor-pointer rounded-xl p-3 transition-all duration-200 hover:shadow-lg sm:p-4"
           >
             <div className="flex items-center gap-3">
               <div
                 className={cn(
-                  "h-12 w-12 rounded-lg flex items-center justify-center shadow-sm p-2 overflow-hidden",
-                  project.color,
+                  "flex h-12 w-12 items-center justify-center overflow-hidden rounded-lg p-2 shadow-sm",
+                  project.color
                 )}
               >
                 {project.icon ? (
@@ -68,10 +71,10 @@ export const ProjectsCard = () => {
                 )}
               </div>
               <div>
-                <h3 className="font-semibold text-sm sm:text-base">
+                <h3 className="text-sm font-semibold sm:text-base">
                   {project.name}
                 </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground font-medium tracking-wide">
+                <p className="text-muted-foreground text-xs font-medium tracking-wide sm:text-sm">
                   {project.tasks} tasks • {project.teammates} teammates
                 </p>
               </div>

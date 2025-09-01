@@ -1,26 +1,30 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Button } from "./ui/button";
+
 import {
-  ClipboardList,
-  Settings,
   Calendar,
   ChartBarBig,
-  Inbox,
-  Home,
   ChevronDown,
+  ClipboardList,
+  Home,
+  Inbox,
+  Settings,
   Sparkle,
 } from "lucide-react";
+
 import { cn } from "@/lib/utils";
-import Image from "next/image";
+
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Button } from "./ui/button";
+
 const AIIcon = ({ className }: { className: string }) => (
   <Sparkle
     className={cn(
       className,
-      "transition-all duration-300 transform rotate-[45deg] fill-black",
+      "rotate-[45deg] transform fill-black transition-all duration-300"
     )}
   />
 );
@@ -64,35 +68,35 @@ export const Sidebar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="hidden lg:flex flex-col h-screen w-65 fixed p-3 bg-white border-none">
+    <div className="fixed hidden h-screen w-65 flex-col border-none bg-white p-3 lg:flex">
       {/* User Profile Section */}
       <div
-        className="mb-4 border-border border-1 rounded-lg"
+        className="border-border mb-4 rounded-lg border-1"
         id="wt-profile-nav-link"
       >
         <Link
           href="/profile"
-          className="flex items-center space-x-3 hover:bg-slate-100/80 p-3 rounded-lg transition-all duration-300 group"
+          className="group flex items-center space-x-3 rounded-lg p-3 transition-all duration-300 hover:bg-slate-100/80"
         >
           <div className="relative">
-            <Avatar className="h-9 w-9 ring-2 ring-slate-200 group-hover:ring-purple-200 transition-all duration-300">
+            <Avatar className="h-9 w-9 ring-2 ring-slate-200 transition-all duration-300 group-hover:ring-purple-200">
               <AvatarImage
                 src="/assets/profile-pick.png"
                 alt="Courtney Henry"
               />
-              <AvatarFallback className="bg-gradient-avatar text-white font-medium">
+              <AvatarFallback className="bg-gradient-avatar font-medium text-white">
                 CH
               </AvatarFallback>
             </Avatar>
-            <div className="absolute bottom-0 right-0.5">
-              <div className="w-2 h-2 bg-status-online rounded-full"></div>
+            <div className="absolute right-0.5 bottom-0">
+              <div className="bg-status-online h-2 w-2 rounded-full"></div>
             </div>
           </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-sidebar-foreground truncate text-modern">
+          <div className="min-w-0 flex-1">
+            <p className="text-sidebar-foreground text-modern truncate text-sm font-medium">
               Courtney Henry
             </p>
-            <p className="text-xs text-muted-foreground truncate text-modern-light">
+            <p className="text-muted-foreground text-modern-light truncate text-xs">
               Online
             </p>
           </div>
@@ -109,33 +113,33 @@ export const Sidebar = () => {
               key={item.path}
               href={item.path}
               className={cn(
-                "flex items-center space-x-3 px-3 py-2.5 rounded-lg transition-all duration-300 group",
+                "group flex items-center space-x-3 rounded-lg px-3 py-2.5 transition-all duration-300",
                 isActive
                   ? "bg-purple-50"
-                  : "text-slate-600 hover:bg-slate-100/80 hover:text-slate-800 hover:shadow-sm",
+                  : "text-slate-600 hover:bg-slate-100/80 hover:text-slate-800 hover:shadow-sm"
               )}
               id={item.id}
             >
               <item.icon
                 className={cn(
                   "h-5 w-5 transition-all duration-300",
-                  isActive ? "text-purple-600" : "group-hover:text-slate-700",
+                  isActive ? "text-purple-600" : "group-hover:text-slate-700"
                 )}
               />
-              <span className="font-medium text-sm text-modern text-foreground">
+              <span className="text-modern text-foreground text-sm font-medium">
                 {item.label}
               </span>
             </Link>
           );
         })}
 
-        <div className="absolute border-border border-b-2 w-full -ml-2 mt-2"></div>
+        <div className="border-border absolute mt-2 -ml-2 w-full border-b-2"></div>
 
-        <div className="flex flex-row justify-between items-center mx-4 mt-8 mb-4">
-          <h2 className="text-sm font-medium bold text-sidebar-foreground text-modern">
+        <div className="mx-4 mt-8 mb-4 flex flex-row items-center justify-between">
+          <h2 className="bold text-sidebar-foreground text-modern text-sm font-medium">
             My Projects
           </h2>
-          <Button className="bg-prodify-light text-prodify-secondary rounded-2xl hover:bg-slate-300 px-2 py-1 h-7 text-xs">
+          <Button className="bg-prodify-light text-prodify-secondary h-7 rounded-2xl px-2 py-1 text-xs hover:bg-slate-300">
             <p className="flex items-center gap-1">+ Add</p>
           </Button>
         </div>
@@ -145,10 +149,10 @@ export const Sidebar = () => {
           {projectItems.map((project, index) => (
             <div
               key={index}
-              className="flex items-center gap-3 p-2 hover:rounded-md text-slate-600 hover:bg-slate-100/80 hover:text-slate-800 hover:shadow-sm cursor-pointer transition-colors"
+              className="flex cursor-pointer items-center gap-3 p-2 text-slate-600 transition-colors hover:rounded-md hover:bg-slate-100/80 hover:text-slate-800 hover:shadow-sm"
             >
-              <div className={cn("w-3 h-3 rounded", project.color)}></div>
-              <span className="text-sm text-foreground ">{project.name}</span>
+              <div className={cn("h-3 w-3 rounded", project.color)}></div>
+              <span className="text-foreground text-sm">{project.name}</span>
             </div>
           ))}
         </div>
@@ -157,30 +161,30 @@ export const Sidebar = () => {
       <div className="flex flex-col">
         <Link
           href="/settings"
-          className="flex items-center space-x-3 px-3 py-2.5 rounded-md transition-all duration-300 group text-slate-600 hover:bg-slate-100/80 hover:text-slate-800 hover:shadow-sm"
+          className="group flex items-center space-x-3 rounded-md px-3 py-2.5 text-slate-600 transition-all duration-300 hover:bg-slate-100/80 hover:text-slate-800 hover:shadow-sm"
         >
           <Settings size={16} />
-          <p className="text-sm font-medium text-sidebar-foreground truncate text-modern">
+          <p className="text-sidebar-foreground text-modern truncate text-sm font-medium">
             Settings
           </p>
         </Link>
       </div>
 
-      <div className="flex flex-col gap-1 m-2 mb-4 bg-gradient-invite rounded-lg p-2 bg-gradient-to-r from-accent-purple to-accent-purple-light">
-        <label className="text-sm font-medium text-sidebar-foreground text-modern flex items-center pt-2 pl-3">
+      <div className="bg-gradient-invite from-accent-purple to-accent-purple-light m-2 mb-4 flex flex-col gap-1 rounded-lg bg-gradient-to-r p-2">
+        <label className="text-sidebar-foreground text-modern flex items-center pt-2 pl-3 text-sm font-medium">
           <Image
             src="/assets/ai-logo.png"
             alt="chat-bot"
             width={25}
             height={25}
-            className="transform rotate-[45deg] mb-1 mr-1 text-white fill-white size-3"
+            className="mr-1 mb-1 size-3 rotate-[45deg] transform fill-white text-white"
           />
-          <span className="font-medium text-lg text-white">prodify</span>
+          <span className="text-lg font-medium text-white">prodify</span>
         </label>
-        <p className="text-sm text-white text-modern p-1 ml-3">
+        <p className="text-modern ml-3 p-1 text-sm text-white">
           New members will gain access to public Spaces, Docs and Dashboards
         </p>
-        <Button className="bg-card text-foreground rounded-2xl hover:bg-slate-200 font-medium w-25 h-8 text-xs text-center mb-2 ml-3 cursor-pointer">
+        <Button className="bg-card text-foreground mb-2 ml-3 h-8 w-25 cursor-pointer rounded-2xl text-center text-xs font-medium hover:bg-slate-200">
           <span>+ Invite people</span>
         </Button>
       </div>

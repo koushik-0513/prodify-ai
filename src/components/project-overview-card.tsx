@@ -1,10 +1,13 @@
 "use client";
 
 import { FolderOpen, Plus } from "lucide-react";
-import { Button } from "./ui/button";
-import { Avatar, AvatarImage } from "./ui/avatar";
-import { stats, projectsDetails } from "@/data/data";
+
 import { cn } from "@/lib/utils";
+
+import { projectsDetails, stats } from "@/data/data";
+
+import { Avatar, AvatarImage } from "./ui/avatar";
+import { Button } from "./ui/button";
 
 export const ProjectOverviewCard = () => {
   const getStatusColors = (status: string) => {
@@ -21,34 +24,34 @@ export const ProjectOverviewCard = () => {
   };
 
   return (
-    <div className="bg-card p-4 sm:p-4 lg:p-6 rounded-2xl border border-border">
+    <div className="bg-card border-border rounded-2xl border p-4 sm:p-4 lg:p-6">
       {/* Header */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <FolderOpen className="h-4 w-4 sm:h-5 sm:w-5 text-prodify-primary" />
-          <h2 className="text-base sm:text-lg font-medium">Project Overview</h2>
+          <FolderOpen className="text-prodify-primary h-4 w-4 sm:h-5 sm:w-5" />
+          <h2 className="text-base font-medium sm:text-lg">Project Overview</h2>
         </div>
         <Button
           variant="ghost"
           size="sm"
-          className="p-2 hover:bg-accent rounded-lg transition-colors"
+          className="hover:bg-accent rounded-lg p-2 transition-colors"
         >
           <Plus size={16} className="text-muted-foreground" />
         </Button>
       </div>
 
       {/* Project Stats */}
-      <div className="grid grid-cols-3 gap-3 mb-4">
+      <div className="mb-4 grid grid-cols-3 gap-3">
         {stats.map((stat, index) => (
           <div
             key={index}
-            className={cn("text-center p-3 rounded-xl", stat.bg)}
+            className={cn("rounded-xl p-3 text-center", stat.bg)}
           >
-            <div className="flex items-center justify-center mb-1">
+            <div className="mb-1 flex items-center justify-center">
               <stat.icon size={16} style={{ color: stat.iconColor }} />
             </div>
             <p className="text-lg font-bold">{stat.value}</p>
-            <p className="text-xs text-muted-foreground">{stat.label}</p>
+            <p className="text-muted-foreground text-xs">{stat.label}</p>
           </div>
         ))}
       </div>
@@ -58,14 +61,14 @@ export const ProjectOverviewCard = () => {
         {projectsDetails.map((project) => (
           <div
             key={project.id}
-            className="p-3 bg-muted rounded-xl hover:bg-accent transition-colors cursor-pointer"
+            className="bg-muted hover:bg-accent cursor-pointer rounded-xl p-3 transition-colors"
           >
-            <div className="flex items-center justify-between mb-2">
-              <h3 className="font-medium text-sm truncate">{project.name}</h3>
+            <div className="mb-2 flex items-center justify-between">
+              <h3 className="truncate text-sm font-medium">{project.name}</h3>
               <span
                 className={cn(
-                  "text-xs px-2 py-1 rounded-full",
-                  getStatusColors(project.status),
+                  "rounded-full px-2 py-1 text-xs",
+                  getStatusColors(project.status)
                 )}
               >
                 {project.status}
@@ -87,19 +90,19 @@ export const ProjectOverviewCard = () => {
                     </Avatar>
                   ))}
                 </div>
-                <span className="text-xs text-muted-foreground">
+                <span className="text-muted-foreground text-xs">
                   {project.team.length} members
                 </span>
               </div>
 
               <div className="flex items-center space-x-2">
-                <div className="w-16 bg-muted rounded-full h-2">
+                <div className="bg-muted h-2 w-16 rounded-full">
                   <div
                     className={cn("h-2 rounded-full", project.color)}
                     style={{ width: `${project.progress}%` }}
                   ></div>
                 </div>
-                <span className="text-xs font-medium text-muted-foreground">
+                <span className="text-muted-foreground text-xs font-medium">
                   {project.progress}%
                 </span>
               </div>

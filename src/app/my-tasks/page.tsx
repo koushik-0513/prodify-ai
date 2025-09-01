@@ -1,23 +1,28 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useMemo, useState } from "react";
+
+import Link from "next/link";
+
+import { TTask } from "@/types/types";
 import {
-  Search,
-  Plus,
-  Clock,
+  AlertCircle,
+  Archive,
   CheckCircle,
   Circle,
-  AlertCircle,
-  MoreHorizontal,
+  Clock,
   Edit3,
-  Archive,
+  MoreHorizontal,
+  Plus,
+  Search,
 } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { tasks } from "@/data/data";
-import { TTask } from "@/types/types";
+
 import { cn } from "@/lib/utils";
-import Link from "next/link";
+
+import { getStatusColor, tasks } from "@/data/data";
 
 const MyTasksPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -87,78 +92,70 @@ const MyTasksPage = () => {
     }
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "IN PROGRESS":
-        return "bg-blue-100 text-blue-800";
-      case "TO DO":
-        return "bg-gray-100 text-gray-800";
-      case "UPCOMING":
-        return "bg-orange-100 text-orange-800";
-      default:
-        return "bg-gray-100 text-gray-800";
-    }
-  };
-
   const TaskItem = ({ task }: { task: TTask }) => (
-    <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
-      <div className="flex items-center gap-3 flex-1">
-        <button
-          onClick={() => toggleTaskCompletion(task.id)}
-          className="flex-shrink-0"
-        >
-          {completedTasks.has(task.id) ? (
-            <CheckCircle size={20} className="text-green-500" />
-          ) : (
-            <Circle size={20} className="text-gray-400 hover:text-green-500" />
-          )}
-        </button>
+    <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-lg border border-gray-200 bg-white p-4 transition-shadow hover:shadow-md">
+      {/* Checkbox */}
+      <button
+        onClick={() => toggleTaskCompletion(task.id)}
+        className="flex-shrink-0"
+      >
+        {completedTasks.has(task.id) ? (
+          <CheckCircle size={20} className="text-green-500" />
+        ) : (
+          <Circle size={20} className="text-gray-400 hover:text-green-500" />
+        )}
+      </button>
 
-        <div className="flex-1 min-w-0">
-          <Link
+      {/* Task Details */}
+      <div className="min-w-0">
+        <Link
+          className={cn(
+            "block truncate font-medium text-gray-900",
+            completedTasks.has(task.id) && "text-gray-500 line-through"
+          )}
+          href={`/my-tasks/${task.id}`}
+        >
+          {task.name}
+        </Link>
+        <div className="mt-1 grid grid-cols-[auto_auto_1fr] items-center gap-2">
+          <span
             className={cn(
-              "font-medium text-gray-900 truncate",
-              completedTasks.has(task.id) && "line-through text-gray-500",
+              "rounded-full px-2 py-1 text-xs whitespace-nowrap",
+              getStatusColor(task.status)
             )}
-            href={`/my-tasks/${task.id}`}
           >
-            {task.name}
-          </Link>
-          <div className="flex items-center gap-2 mt-1">
-            <span
-              className={cn(
-                "text-xs px-2 py-1 rounded-full",
-                getStatusColor(task.status),
-              )}
-            >
-              {task.status}
-            </span>
-            <span className="text-xs text-gray-500">•</span>
-            <span className={cn("text-xs", task.dueDateColor)}>
-              {task.dueDate}
-            </span>
-          </div>
+            {task.status}
+          </span>
+          <span className="text-xs text-gray-500">•</span>
+          <span className={cn("truncate text-xs", task.dueDateColor)}>
+            {task.dueDate}
+          </span>
         </div>
       </div>
 
-      <div className="flex items-center gap-2">
+      {/* Actions */}
+      <div className="grid grid-cols-[auto_auto] items-center gap-2">
         <div className="flex items-center gap-1">
           {getPriorityIcon(task.priority)}
           <span
             className={cn(
-              "text-xs px-2 py-1 rounded-sm font-medium",
-              task.priorityColor,
+              "hidden rounded-sm px-2 py-1 text-xs font-medium sm:inline-block",
+              task.priorityColor
             )}
           >
             {task.priority}
           </span>
         </div>
 
-        <div className="flex items-center gap-1">
+        <div className="grid grid-cols-3 gap-1">
           <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
             <Edit3 size={14} />
           </Button>
-          <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="hidden h-8 w-8 p-0 sm:flex"
+          >
             <Archive size={14} />
           </Button>
           <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
@@ -179,7 +176,7 @@ const MyTasksPage = () => {
     color: string;
   }) => (
     <div className="space-y-3">
-      <div className="flex items-center justify-between">
+      <div className="grid grid-cols-[1fr_auto] items-center gap-4">
         <h2 className={cn("text-lg font-semibold", color)}>
           {title} ({sectionTasks.length})
         </h2>
@@ -191,13 +188,13 @@ const MyTasksPage = () => {
       </div>
 
       {sectionTasks.length > 0 ? (
-        <div className="space-y-2">
+        <div className="grid gap-2">
           {sectionTasks.map((task) => (
             <TaskItem key={task.id} task={task} />
           ))}
         </div>
       ) : (
-        <div className="text-center py-8 text-gray-500">
+        <div className="py-8 text-center text-gray-500">
           <Circle size={48} className="mx-auto mb-2 text-gray-300" />
           <p>No tasks in this section</p>
         </div>
@@ -208,16 +205,18 @@ const MyTasksPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 px-6 py-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between">
+      <div className="border-b border-gray-200 bg-white px-4 py-4 sm:px-6">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-[1fr_auto]">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">My Tasks</h1>
-              <p className="text-gray-600 mt-1">
+              <h1 className="text-xl font-bold text-gray-900 sm:text-2xl">
+                My Tasks
+              </h1>
+              <p className="mt-1 text-sm text-gray-600 sm:text-base">
                 Manage and track your tasks efficiently
               </p>
             </div>
-            <Button className="bg-blue-600 hover:bg-blue-700">
+            <Button className="w-full bg-blue-600 hover:bg-blue-700 sm:w-auto">
               <Plus size={16} className="mr-2" />
               Add Task
             </Button>
@@ -225,28 +224,26 @@ const MyTasksPage = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-6">
+      <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 sm:py-6">
         {/* Filters and Search */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4 mb-6">
-          <div className="flex flex-col sm:flex-row gap-4">
+        <div className="mb-6 rounded-lg border border-gray-200 bg-white p-4">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_auto]">
             {/* Search */}
-            <div className="flex-1">
-              <div className="relative">
-                <Search
-                  size={16}
-                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-                />
-                <Input
-                  placeholder="Search tasks..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10"
-                />
-              </div>
+            <div className="relative">
+              <Search
+                size={16}
+                className="absolute top-1/2 left-3 -translate-y-1/2 transform text-gray-400"
+              />
+              <Input
+                placeholder="Search tasks..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10"
+              />
             </div>
 
-            {/* Status Filter */}
-            <div className="flex gap-2">
+            {/* Filters */}
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-[auto_auto]">
               <select
                 value={statusFilter}
                 onChange={(e) =>
@@ -255,10 +252,10 @@ const MyTasksPage = () => {
                       | "ALL"
                       | "IN PROGRESS"
                       | "TO DO"
-                      | "UPCOMING",
+                      | "UPCOMING"
                   )
                 }
-                className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
               >
                 <option value="ALL">All Status</option>
                 <option value="IN PROGRESS">In Progress</option>
@@ -266,15 +263,14 @@ const MyTasksPage = () => {
                 <option value="UPCOMING">Upcoming</option>
               </select>
 
-              {/* Priority Filter */}
               <select
                 value={priorityFilter}
                 onChange={(e) =>
                   setPriorityFilter(
-                    e.target.value as "ALL" | "High" | "Medium" | "Low",
+                    e.target.value as "ALL" | "High" | "Medium" | "Low"
                   )
                 }
-                className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
               >
                 <option value="ALL">All Priority</option>
                 <option value="High">High</option>
@@ -285,82 +281,90 @@ const MyTasksPage = () => {
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
-            <div className="flex items-center justify-between">
+        {/* Stats Grid */}
+        <div className="mb-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+          <div className="rounded-lg border border-gray-200 bg-white p-3 sm:p-4">
+            <div className="grid grid-cols-[1fr_auto] items-center gap-2">
               <div>
-                <p className="text-sm text-gray-600">Total Tasks</p>
-                <p className="text-2xl font-bold text-gray-900">
+                <p className="text-xs text-gray-600 sm:text-sm">Total Tasks</p>
+                <p className="text-xl font-bold text-gray-900 sm:text-2xl">
                   {tasks.length}
                 </p>
               </div>
-              <div className="bg-blue-100 p-2 rounded-lg">
+              <div className="rounded-lg bg-blue-100 p-2">
                 <CheckCircle size={20} className="text-blue-600" />
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
-            <div className="flex items-center justify-between">
+          <div className="rounded-lg border border-gray-200 bg-white p-3 sm:p-4">
+            <div className="grid grid-cols-[1fr_auto] items-center gap-2">
               <div>
-                <p className="text-sm text-gray-600">In Progress</p>
-                <p className="text-2xl font-bold text-blue-600">
+                <p className="text-xs text-gray-600 sm:text-sm">In Progress</p>
+                <p className="text-xl font-bold text-blue-600 sm:text-2xl">
                   {groupedTasks["IN PROGRESS"].length}
                 </p>
               </div>
-              <div className="bg-blue-100 p-2 rounded-lg">
+              <div className="rounded-lg bg-blue-100 p-2">
                 <Clock size={20} className="text-blue-600" />
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
-            <div className="flex items-center justify-between">
+          <div className="rounded-lg border border-gray-200 bg-white p-3 sm:p-4">
+            <div className="grid grid-cols-[1fr_auto] items-center gap-2">
               <div>
-                <p className="text-sm text-gray-600">To Do</p>
-                <p className="text-2xl font-bold text-gray-600">
+                <p className="text-xs text-gray-600 sm:text-sm">To Do</p>
+                <p className="text-xl font-bold text-gray-600 sm:text-2xl">
                   {groupedTasks["TO DO"].length}
                 </p>
               </div>
-              <div className="bg-gray-100 p-2 rounded-lg">
+              <div className="rounded-lg bg-gray-100 p-2">
                 <Circle size={20} className="text-gray-600" />
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
-            <div className="flex items-center justify-between">
+          <div className="rounded-lg border border-gray-200 bg-white p-3 sm:p-4">
+            <div className="grid grid-cols-[1fr_auto] items-center gap-2">
               <div>
-                <p className="text-sm text-gray-600">Completed</p>
-                <p className="text-2xl font-bold text-green-600">
+                <p className="text-xs text-gray-600 sm:text-sm">Completed</p>
+                <p className="text-xl font-bold text-green-600 sm:text-2xl">
                   {completedTasks.size}
                 </p>
               </div>
-              <div className="bg-green-100 p-2 rounded-lg">
+              <div className="rounded-lg bg-green-100 p-2">
                 <CheckCircle size={20} className="text-green-600" />
               </div>
             </div>
           </div>
         </div>
 
-        {/* Task Sections */}
-        <div className="space-y-8">
-          <TaskSection
-            title="In Progress"
-            tasks={groupedTasks["IN PROGRESS"]}
-            color="text-blue-600"
-          />
-          <TaskSection
-            title="To Do"
-            tasks={groupedTasks["TO DO"]}
-            color="text-gray-600"
-          />
-          <TaskSection
-            title="Upcoming"
-            tasks={groupedTasks["UPCOMING"]}
-            color="text-orange-600"
-          />
+        {/* Task Sections - Main Grid Container */}
+        <div className="grid grid-cols-1 gap-6 xl:grid-cols-3 xl:gap-8">
+          <div className="xl:col-span-1">
+            <TaskSection
+              title="In Progress"
+              tasks={groupedTasks["IN PROGRESS"]}
+              color="text-blue-600"
+            />
+          </div>
+
+          <div className="xl:col-span-1">
+            <TaskSection
+              title="To Do"
+              tasks={groupedTasks["TO DO"]}
+              color="text-gray-600"
+            />
+          </div>
+
+          <div className="xl:col-span-1">
+            <TaskSection
+              title="Upcoming"
+              tasks={groupedTasks["UPCOMING"]}
+              color="text-orange-600"
+            />
+          </div>
         </div>
       </div>
     </div>
