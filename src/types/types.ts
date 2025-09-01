@@ -1,5 +1,4 @@
 // types/data.types.ts
-
 import { LucideIcon } from "lucide-react";
 
 export type TTask = {

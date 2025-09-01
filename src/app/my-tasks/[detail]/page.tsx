@@ -1,7 +1,8 @@
 "use client";
 
-import { tasks } from "@/data/data";
 import { useParams } from "next/navigation";
+
+import { tasks } from "@/data/data";
 
 export default function TaskDetailPage() {
   const params = useParams();
@@ -15,11 +16,11 @@ export default function TaskDetailPage() {
   // Ensure id exists and handle array case
   if (!id) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
-          <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 p-4">
+        <div className="w-full max-w-md rounded-2xl bg-white p-8 text-center shadow-xl">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-100">
             <svg
-              className="w-8 h-8 text-red-600"
+              className="h-8 w-8 text-red-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -32,7 +33,7 @@ export default function TaskDetailPage() {
               />
             </svg>
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          <h2 className="mb-2 text-2xl font-bold text-gray-900">
             No Task ID Provided
           </h2>
           <p className="text-gray-600">
@@ -49,11 +50,11 @@ export default function TaskDetailPage() {
   // Check if parsing was successful
   if (isNaN(taskId)) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
-          <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 p-4">
+        <div className="w-full max-w-md rounded-2xl bg-white p-8 text-center shadow-xl">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-amber-100">
             <svg
-              className="w-8 h-8 text-amber-600"
+              className="h-8 w-8 text-amber-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -66,7 +67,7 @@ export default function TaskDetailPage() {
               />
             </svg>
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          <h2 className="mb-2 text-2xl font-bold text-gray-900">
             Invalid Task ID
           </h2>
           <p className="text-gray-600">The provided task ID is not valid.</p>
@@ -79,11 +80,11 @@ export default function TaskDetailPage() {
 
   if (!task) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
-          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 p-4">
+        <div className="w-full max-w-md rounded-2xl bg-white p-8 text-center shadow-xl">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-100">
             <svg
-              className="w-8 h-8 text-gray-600"
+              className="h-8 w-8 text-gray-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -96,18 +97,18 @@ export default function TaskDetailPage() {
               />
             </svg>
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          <h2 className="mb-2 text-2xl font-bold text-gray-900">
             Task Not Found
           </h2>
-          <p className="text-gray-600 mb-6">
+          <p className="mb-6 text-gray-600">
             We couldn't find a task with ID #{taskId}
           </p>
           <button
             onClick={() => window.history.back()}
-            className="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-medium rounded-xl hover:bg-indigo-700 transition-all duration-200 transform hover:scale-105"
+            className="inline-flex transform items-center rounded-xl bg-indigo-600 px-6 py-3 font-medium text-white transition-all duration-200 hover:scale-105 hover:bg-indigo-700"
           >
             <svg
-              className="w-5 h-5 mr-2"
+              className="mr-2 h-5 w-5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -129,15 +130,15 @@ export default function TaskDetailPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
       {/* Header Navigation */}
-      <div className="bg-white shadow-sm border-b border-gray-200">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+      <div className="border-b border-gray-200 bg-white shadow-sm">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
             <button
               onClick={() => window.history.back()}
-              className="inline-flex items-center px-4 py-2 text-gray-700 hover:text-indigo-600 transition-colors duration-200"
+              className="inline-flex items-center px-4 py-2 text-gray-700 transition-colors duration-200 hover:text-indigo-600"
             >
               <svg
-                className="w-5 h-5 mr-2"
+                className="mr-2 h-5 w-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -152,9 +153,9 @@ export default function TaskDetailPage() {
               Back to Tasks
             </button>
             <div className="flex items-center space-x-3">
-              <button className="p-2 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all duration-200">
+              <button className="rounded-lg p-2 text-gray-600 transition-all duration-200 hover:bg-indigo-50 hover:text-indigo-600">
                 <svg
-                  className="w-5 h-5"
+                  className="h-5 w-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -167,9 +168,9 @@ export default function TaskDetailPage() {
                   />
                 </svg>
               </button>
-              <button className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200">
+              <button className="rounded-lg p-2 text-gray-600 transition-all duration-200 hover:bg-red-50 hover:text-red-600">
                 <svg
-                  className="w-5 h-5"
+                  className="h-5 w-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -188,13 +189,13 @@ export default function TaskDetailPage() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+      <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+        <div className="overflow-hidden rounded-2xl bg-white shadow-xl">
           {/* Task Header Section */}
           <div className="bg-gradient-to-r from-indigo-500 to-purple-600 px-8 py-12">
-            <div className="flex items-center text-white/80 text-sm font-medium mb-3">
+            <div className="mb-3 flex items-center text-sm font-medium text-white/80">
               <svg
-                className="w-4 h-4 mr-2"
+                className="mr-2 h-4 w-4"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -208,12 +209,12 @@ export default function TaskDetailPage() {
               </svg>
               Task #{taskId}
             </div>
-            <h1 className="text-4xl font-bold text-white mb-4">{task.name}</h1>
+            <h1 className="mb-4 text-4xl font-bold text-white">{task.name}</h1>
             <div className="flex items-center space-x-4">
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white/20 text-white backdrop-blur-sm">
+              <span className="inline-flex items-center rounded-full bg-white/20 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
                 Active
               </span>
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white/20 text-white backdrop-blur-sm">
+              <span className="inline-flex items-center rounded-full bg-white/20 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
                 High Priority
               </span>
             </div>
@@ -223,10 +224,10 @@ export default function TaskDetailPage() {
           <div className="p-8">
             <div className="space-y-6">
               {/* Description Section */}
-              <div className="bg-gray-50 rounded-xl p-6">
-                <div className="flex items-center mb-3">
+              <div className="rounded-xl bg-gray-50 p-6">
+                <div className="mb-3 flex items-center">
                   <svg
-                    className="w-5 h-5 text-gray-600 mr-2"
+                    className="mr-2 h-5 w-5 text-gray-600"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -242,17 +243,17 @@ export default function TaskDetailPage() {
                     Description
                   </h2>
                 </div>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="leading-relaxed text-gray-700">
                   {task.description || "No description provided for this task."}
                 </p>
               </div>
 
               {/* Additional Info Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-blue-50 rounded-xl p-4 border border-blue-100">
-                  <div className="flex items-center mb-2">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                <div className="rounded-xl border border-blue-100 bg-blue-50 p-4">
+                  <div className="mb-2 flex items-center">
                     <svg
-                      className="w-5 h-5 text-blue-600 mr-2"
+                      className="mr-2 h-5 w-5 text-blue-600"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -268,13 +269,13 @@ export default function TaskDetailPage() {
                       Status
                     </span>
                   </div>
-                  <p className="text-blue-700 font-semibold">{task.status}</p>
+                  <p className="font-semibold text-blue-700">{task.status}</p>
                 </div>
 
-                <div className="bg-green-50 rounded-xl p-4 border border-green-100">
-                  <div className="flex items-center mb-2">
+                <div className="rounded-xl border border-green-100 bg-green-50 p-4">
+                  <div className="mb-2 flex items-center">
                     <svg
-                      className="w-5 h-5 text-green-600 mr-2"
+                      className="mr-2 h-5 w-5 text-green-600"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -290,13 +291,13 @@ export default function TaskDetailPage() {
                       Due Date
                     </span>
                   </div>
-                  <p className="text-green-700 font-semibold">{task.dueDate}</p>
+                  <p className="font-semibold text-green-700">{task.dueDate}</p>
                 </div>
 
-                <div className="bg-purple-50 rounded-xl p-4 border border-purple-100">
-                  <div className="flex items-center mb-2">
+                <div className="rounded-xl border border-purple-100 bg-purple-50 p-4">
+                  <div className="mb-2 flex items-center">
                     <svg
-                      className="w-5 h-5 text-purple-600 mr-2"
+                      className="mr-2 h-5 w-5 text-purple-600"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -312,16 +313,16 @@ export default function TaskDetailPage() {
                       Assigned
                     </span>
                   </div>
-                  <p className="text-purple-700 font-semibold">John Doe</p>
+                  <p className="font-semibold text-purple-700">John Doe</p>
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                <button className="flex-1 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg">
+              <div className="flex flex-col gap-4 pt-6 sm:flex-row">
+                <button className="flex-1 transform rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-3 font-medium text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-indigo-700 hover:to-purple-700">
                   Complete Task
                 </button>
-                <button className="flex-1 px-6 py-3 bg-white text-gray-700 font-medium rounded-xl border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 transition-all duration-200">
+                <button className="flex-1 rounded-xl border-2 border-gray-300 bg-white px-6 py-3 font-medium text-gray-700 transition-all duration-200 hover:border-gray-400 hover:bg-gray-50">
                   Edit Details
                 </button>
               </div>

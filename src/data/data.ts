@@ -1,4 +1,3 @@
-import { TrendingUp, Users, Clock, Sparkle } from "lucide-react";
 import {
   TDateItem,
   TGoal,
@@ -8,6 +7,19 @@ import {
   TStat,
   TTask,
 } from "@/types/types";
+import {
+  Calendar,
+  ChartBarBig,
+  ClipboardList,
+  Clock,
+  Home,
+  Inbox,
+  Sparkle,
+  TrendingUp,
+  Users,
+} from "lucide-react";
+
+import { AIIcon } from "@/components/ui/ai-icon";
 
 export const tasks: TTask[] = [
   {
@@ -286,3 +298,45 @@ export const dates: TDateItem[] = [
   { day: "Wed", date: "09" },
   { day: "Thu", date: "10" },
 ];
+
+export const menuItems = [
+  { id: "wt-home-nav-link", Icon: Home, label: "Home", path: "/home" },
+  {
+    id: "wt-prodify-ai-nav-link",
+    Icon: AIIcon,
+    label: "Prodify AI",
+    path: "/prodify-ai",
+  },
+  {
+    id: "wt-my-tasks-nav-link",
+    Icon: ClipboardList,
+    label: "My tasks",
+    path: "/my-tasks",
+  },
+  { id: "wt-inbox-nav-link", Icon: Inbox, label: "Inbox", path: "/inbox" },
+  {
+    id: "wt-calendar-nav-link",
+    Icon: Calendar,
+    label: "Calendar",
+    path: "/calendar",
+  },
+  {
+    id: "wt-reports-and-analytics-nav-link",
+    Icon: ChartBarBig,
+    label: "Reports & Analytics",
+    path: "/reports-and-analytics",
+  },
+];
+
+export const getStatusColor = (status: string) => {
+  switch (status) {
+    case "IN PROGRESS":
+      return "bg-blue-100 text-blue-800";
+    case "TO DO":
+      return "bg-gray-100 text-gray-800";
+    case "UPCOMING":
+      return "bg-orange-100 text-orange-800";
+    default:
+      return "bg-gray-100 text-gray-800";
+  }
+};

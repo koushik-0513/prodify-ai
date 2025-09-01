@@ -4,20 +4,20 @@ import Image from "next/image";
 
 export const FloatingActionButton = () => {
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed right-6 bottom-6 z-50">
       {/* Outer glow rings */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-accent-purple to-accent-cyan opacity-30 blur-xl scale-150 animate-pulse"></div>
-      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-accent-purple-light to-accent-cyan-light opacity-40 blur-lg scale-125"></div>
+      <div className="from-accent-purple to-accent-cyan absolute inset-0 scale-150 animate-pulse rounded-full bg-gradient-to-r opacity-30 blur-xl"></div>
+      <div className="from-accent-purple-light to-accent-cyan-light absolute inset-0 scale-125 rounded-full bg-gradient-to-r opacity-40 blur-lg"></div>
 
       {/* Glass button with border */}
-      <div className="relative border-4 border-white/80 rounded-full backdrop-blur-md bg-white/20">
-        <button className="w-10 h-10 flex items-center bg-gradient-to-br from-chat-bot-bg1 to-chat-bot-bg2 justify-center rounded-full backdrop-blur-sm relative overflow-hidden shadow-2xl before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-tr before:from-white/40 before:via-white/20 before:to-transparent before:pointer-events-none">
+      <div className="relative rounded-full border-4 border-white/80 bg-white/20 backdrop-blur-md">
+        <button className="from-chat-bot-bg1 to-chat-bot-bg2 relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br shadow-2xl backdrop-blur-sm before:pointer-events-none before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-tr before:from-white/40 before:via-white/20 before:to-transparent">
           <Image
             src="/assets/ai-logo.png"
             alt="chat-bot"
             width={30}
             height={30}
-            className="transform rotate-[45deg] relative z-10"
+            className="relative z-10 rotate-[45deg] transform"
           />
         </button>
       </div>

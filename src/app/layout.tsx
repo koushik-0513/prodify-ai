@@ -1,7 +1,8 @@
-import "./globals.css";
-import { Sidebar } from "@/components/side-navigation-bar";
-import { MobileTopNavigation } from "@/components/mobile-top-navigation";
 import { FloatingActionButton } from "@/components/chat-bot";
+import { MobileTopNavigation } from "@/components/mobile-top-navigation";
+import { Sidebar } from "@/components/side-navigation-bar";
+
+import "./globals.css";
 
 export default function RootLayout({
   children,

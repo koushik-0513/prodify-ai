@@ -1,26 +1,28 @@
 "use client";
 
-import {
-  Clock,
-  Bell,
-  Trash2,
-  Check,
-  ChevronUp,
-  ChevronDown,
-  EllipsisVertical,
-} from "lucide-react";
 import { useState } from "react";
-import { initialReminders } from "@/data/data";
+
 import {
   TReminder,
   TReminderExpandedSections,
   TReminderSection,
   TRemindersData,
 } from "@/types/types";
-import { cn } from "@/lib/utils";
-import { Button } from "./ui/button";
+import {
+  Bell,
+  Check,
+  ChevronDown,
+  ChevronUp,
+  Clock,
+  EllipsisVertical,
+  Trash2,
+} from "lucide-react";
 
-interface ReminderSectionProps {
+import { cn } from "@/lib/utils";
+
+import { initialReminders } from "@/data/data";
+
+type ReminderSectionProps = {
   section: TReminderSection;
   reminders: TReminder[];
   isExpanded: boolean;
@@ -30,7 +32,7 @@ interface ReminderSectionProps {
   onCompleteReminder: (section: TReminderSection, id: number) => void;
   onDeleteReminder: (section: TReminderSection, id: number) => void;
   handleReminderAlert: (id: number) => void;
-}
+};
 
 const ReminderSection = ({
   section,
@@ -76,14 +78,14 @@ const ReminderSection = ({
       <div className="flex items-center justify-between">
         <button
           onClick={() => onToggleSection(section)}
-          className="flex items-center gap-2 hover:bg-accent p-1 rounded transition-colors cursor-pointer"
+          className="hover:bg-accent flex cursor-pointer items-center gap-2 rounded p-1 transition-colors"
         >
           {isExpanded ? (
-            <ChevronUp className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground cursor-pointer" />
+            <ChevronUp className="text-muted-foreground h-3 w-3 cursor-pointer sm:h-4 sm:w-4" />
           ) : (
-            <ChevronDown className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground cursor-pointer" />
+            <ChevronDown className="text-muted-foreground h-3 w-3 cursor-pointer sm:h-4 sm:w-4" />
           )}
-          <span className="text-sm font-semibold text-foreground">
+          <span className="text-foreground text-sm font-semibold">
             {getSectionTitle(section)}
             <span className="text-muted-foreground">
               {" "}
@@ -98,16 +100,16 @@ const ReminderSection = ({
           {reminders.map((reminder) => (
             <div
               key={reminder.id}
-              className="flex items-start justify-between sm:p-2.5 relative"
+              className="relative flex items-start justify-between sm:p-2.5"
             >
-              <p className="text-md flex-1 pr-2 break-words leading-tight min-w-0">
+              <p className="text-md min-w-0 flex-1 truncate pr-2 leading-tight break-words">
                 {reminder.text}
               </p>
 
               {/* Mobile: Ellipsis button */}
-              <div className="sm:hidden flex-shrink-0 ml-2">
+              <div className="ml-2 flex-shrink-0 sm:hidden">
                 <button
-                  className="p-1 hover:bg-accent rounded-sm transition-colors cursor-pointer"
+                  className="hover:bg-accent cursor-pointer rounded-sm p-1 transition-colors"
                   onClick={() => onToggleReminder(reminder.id)}
                 >
                   <EllipsisVertical size={16} className="text-foreground" />
@@ -116,33 +118,33 @@ const ReminderSection = ({
 
               {/* Mobile: Expanded action buttons */}
               {expandedReminders.includes(reminder.id) && (
-                <div className="sm:hidden absolute right-4 mt-8 bg-card border border-border rounded-lg shadow-lg p-2 z-10">
+                <div className="bg-card border-border absolute right-4 z-10 mt-8 rounded-lg border p-2 shadow-lg sm:hidden">
                   <div className="flex flex-col gap-2">
                     <button
                       onClick={() => handleReminderAlert(reminder.id)}
-                      className="flex items-center gap-2 p-2 hover:bg-accent rounded-sm transition-colors text-sm cursor-pointer"
+                      className="hover:bg-accent flex cursor-pointer items-center gap-2 rounded-sm p-2 text-sm transition-colors"
                     >
                       <Bell size={16} className="text-foreground" />
                       <span>Remind</span>
                     </button>
                     <button
                       onClick={() => onDeleteReminder(section, reminder.id)}
-                      className="flex items-center gap-2 p-2 hover:bg-accent rounded-sm transition-colors text-sm cursor-pointer"
+                      className="hover:bg-accent flex cursor-pointer items-center gap-2 rounded-sm p-2 text-sm transition-colors"
                     >
                       <Trash2 size={16} className="text-foreground" />
                       <span>Delete</span>
                     </button>
                     <button
                       onClick={() => onCompleteReminder(section, reminder.id)}
-                      className="flex items-center gap-2 p-2 hover:bg-accent rounded-sm transition-colors text-sm cursor-pointer"
+                      className="hover:bg-accent flex cursor-pointer items-center gap-2 rounded-sm p-2 text-sm transition-colors"
                     >
                       <Check
                         size={16}
                         className={cn(
                           "rounded",
                           reminder.completed
-                            ? "text-white bg-accent-cyan"
-                            : "text-muted-foreground bg-gray-200",
+                            ? "bg-accent-cyan text-white"
+                            : "text-muted-foreground bg-gray-200"
                         )}
                       />
                       <span>{reminder.completed ? "Undo" : "Complete"}</span>
@@ -152,32 +154,32 @@ const ReminderSection = ({
               )}
 
               {/* Desktop: Always visible action buttons */}
-              <div className="hidden sm:flex items-center justify-center gap-4 flex-shrink-0 ml-2">
-                <Button
+              <div className="ml-2 hidden flex-shrink-0 items-center justify-center gap-4 sm:flex">
+                <button
                   onClick={() => handleReminderAlert(reminder.id)}
                   className={cn(
-                    "hover:bg-accent rounded-sm transition-colors cursor-pointer bg-white h-5 w-4",
+                    "hover:bg-accent h-5 w-4 cursor-pointer rounded-sm bg-white transition-colors"
                   )}
                   title="Set reminder alert"
                 >
                   <Bell size={16} className="text-foreground" />
-                </Button>
-                <Button
+                </button>
+                <button
                   onClick={() => onDeleteReminder(section, reminder.id)}
                   className={cn(
-                    "hover:bg-accent rounded-sm transition-colors cursor-pointer bg-white h-5 w-4",
+                    "hover:bg-accent h-5 w-4 cursor-pointer rounded-sm bg-white transition-colors"
                   )}
                   title="Delete reminder"
                 >
                   <Trash2 size={16} className="text-foreground" />
-                </Button>
-                <Button
+                </button>
+                <button
                   onClick={() => onCompleteReminder(section, reminder.id)}
                   className={cn(
-                    "rounded-md transition-colors cursor-pointer h-5 w-4",
+                    "flex h-5 w-5 cursor-pointer items-center justify-center rounded-xl transition-colors",
                     reminder.completed
                       ? "bg-accent-cyan hover:bg-accent-cyan-alt"
-                      : "bg-gray-200 hover:bg-gray-300",
+                      : "bg-gray-200 hover:bg-gray-300"
                   )}
                   title={
                     reminder.completed
@@ -193,7 +195,7 @@ const ReminderSection = ({
                         : "text-muted-foreground"
                     }
                   />
-                </Button>
+                </button>
               </div>
             </div>
           ))}
@@ -215,7 +217,7 @@ export const RemindersCard = () => {
 
   const toggleReminder = (id: number) => {
     setExpandedReminders((prev) =>
-      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id],
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
     );
   };
 
@@ -232,7 +234,7 @@ export const RemindersCard = () => {
       [section]: prev[section].map((reminder) =>
         reminder.id === id
           ? { ...reminder, completed: !reminder.completed }
-          : reminder,
+          : reminder
       ),
     }));
     // Close mobile menu
@@ -270,10 +272,10 @@ export const RemindersCard = () => {
   ];
 
   return (
-    <div className="bg-card p-3 sm:p-4 lg:p-7 rounded-2xl border border-border">
-      <div className="flex items-center gap-2 mb-3 sm:mb-4 ml-1">
-        <Clock className="size-4 sm:size-5 text-prodify-primary" />
-        <h2 className="text-base sm:text-lg font-medium">Reminders</h2>
+    <div className="bg-card border-border rounded-2xl border p-3 sm:p-4 lg:p-7">
+      <div className="mb-3 ml-1 flex items-center gap-2 sm:mb-4">
+        <Clock className="text-prodify-primary size-4 sm:size-5" />
+        <h2 className="text-base font-medium sm:text-lg">Reminders</h2>
       </div>
 
       <div className="space-y-4">
