@@ -196,17 +196,6 @@ export const ChatPage = () => {
         transition={{ delay: 0.2, duration: 0.3 }}
       >
         <div className="relative flex items-center">
-          <motion.button
-            type="button"
-            className="absolute left-2 rounded-full p-1.5 text-gray-500 hover:bg-gray-100"
-            whileHover={{ scale: 1.1, backgroundColor: "rgba(0, 0, 0, 0.1)" }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            title="Attach file"
-          >
-            <Paperclip size={20} />
-          </motion.button>
-          
           <motion.input
             type="text"
             value={inputValue}
@@ -222,17 +211,6 @@ export const ChatPage = () => {
           />
           
           <div className="absolute right-2 flex items-center gap-1">
-            <motion.button
-              type="button"
-              className="rounded-full p-1.5 text-gray-500 hover:bg-gray-100"
-              whileHover={{ scale: 1.1, backgroundColor: "rgba(0, 0, 0, 0.1)" }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
-              title="Voice message"
-            >
-              <Mic size={20} />
-            </motion.button>
-            
             <motion.button
               type="submit"
               disabled={!inputValue.trim()}
