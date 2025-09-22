@@ -82,3 +82,45 @@ export type TTaskExpandedSections = TExpandedSections<
 export type TReminderExpandedSections = TExpandedSections<
   "today" | "tomorrow" | "dayAfter"
 >;
+
+export type ChatMessage = {
+  _id: string;
+  content: string;
+  role: "user" | "assistant";
+  timestamp: Date;
+};
+
+export type Chat = {
+  _id: string;
+  userId: string;
+  title?: string;
+  lastMessage?: string;
+  timestamp?: string;
+  messages: ChatMessage[];
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type CreateChatRequest = {
+  userId: string;
+};
+
+export type CreateChatResponse = {
+  success: boolean;
+  chatId: string;
+  message: string;
+};
+
+export type UpdateChatRequest = {
+  chatId: string;
+  botMessageId: string;
+  messages: ChatMessage[];
+};
+
+export type ChatStreamChunk = {
+  type: "chunk" | "complete";
+  content?: string;
+  messageId?: string;
+  chatId?: string;
+  fullContent?: string;
+};
